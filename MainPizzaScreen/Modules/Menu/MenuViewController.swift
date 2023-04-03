@@ -19,6 +19,13 @@ protocol MenuDisplayLogic: AnyObject
 
 class MenuViewController: UIViewController, MenuDisplayLogic
 {
+    
+    private lazy var menuCollectionView: UICollectionView = {
+        let collectionView = UICollectionView()
+        
+        return collectionView
+    }()
+    
   var interactor: MenuBusinessLogic?
   var router: (NSObjectProtocol & MenuRoutingLogic & MenuDataPassing)?
 
@@ -69,9 +76,14 @@ class MenuViewController: UIViewController, MenuDisplayLogic
   override func viewDidLoad()
   {
     super.viewDidLoad()
-      view.backgroundColor = .red
+      view.backgroundColor = .green
     doSomething()
   }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.backgroundColor = .white
+    }
   
   // MARK: Do something
   
