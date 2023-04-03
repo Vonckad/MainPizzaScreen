@@ -19,9 +19,9 @@
 		C9E9297229DAC6C700A6DBBF /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9296C29DAC6C700A6DBBF /* MenuViewController.swift */; };
 		C9E9297329DAC6C700A6DBBF /* MenuInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9296D29DAC6C700A6DBBF /* MenuInteractor.swift */; };
 		C9E9297629DACACA00A6DBBF /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9297529DACACA00A6DBBF /* MainTabBarViewController.swift */; };
-		C9E9297A29DACC7200A6DBBF /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9297929DACC7200A6DBBF /* ContactsViewController.swift */; };
 		C9E9297D29DAD04F00A6DBBF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9297C29DAD04F00A6DBBF /* ProfileViewController.swift */; };
 		C9E9298029DAD08900A6DBBF /* BasketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9297F29DAD08900A6DBBF /* BasketViewController.swift */; };
+		C9E9298329DAD13000A6DBBF /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9298229DAD13000A6DBBF /* ContactsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,9 +39,9 @@
 		C9E9296C29DAC6C700A6DBBF /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		C9E9296D29DAC6C700A6DBBF /* MenuInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInteractor.swift; sourceTree = "<group>"; };
 		C9E9297529DACACA00A6DBBF /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
-		C9E9297929DACC7200A6DBBF /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		C9E9297C29DAD04F00A6DBBF /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		C9E9297F29DAD08900A6DBBF /* BasketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketViewController.swift; sourceTree = "<group>"; };
+		C9E9298229DAD13000A6DBBF /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +90,7 @@
 			children = (
 				C9E9297429DACAA500A6DBBF /* MainTabBar */,
 				C9E9296729DAC6B900A6DBBF /* Menu */,
-				C9E9297829DACC5B00A6DBBF /* Contacts */,
+				C9E9298129DAD11E00A6DBBF /* Contacts */,
 				C9E9297B29DAD03E00A6DBBF /* Profile */,
 				C9E9297E29DAD06D00A6DBBF /* Basket */,
 			);
@@ -118,15 +118,6 @@
 			path = MainTabBar;
 			sourceTree = "<group>";
 		};
-		C9E9297829DACC5B00A6DBBF /* Contacts */ = {
-			isa = PBXGroup;
-			children = (
-				C9E9297929DACC7200A6DBBF /* ContactsViewController.swift */,
-			);
-			name = Contacts;
-			path = Menu;
-			sourceTree = "<group>";
-		};
 		C9E9297B29DAD03E00A6DBBF /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +132,14 @@
 				C9E9297F29DAD08900A6DBBF /* BasketViewController.swift */,
 			);
 			path = Basket;
+			sourceTree = "<group>";
+		};
+		C9E9298129DAD11E00A6DBBF /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				C9E9298229DAD13000A6DBBF /* ContactsViewController.swift */,
+			);
+			path = Contacts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,7 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9E9297329DAC6C700A6DBBF /* MenuInteractor.swift in Sources */,
-				C9E9297A29DACC7200A6DBBF /* ContactsViewController.swift in Sources */,
+				C9E9298329DAD13000A6DBBF /* ContactsViewController.swift in Sources */,
 				C9E9298029DAD08900A6DBBF /* BasketViewController.swift in Sources */,
 				C9E9294329DAC48900A6DBBF /* AppDelegate.swift in Sources */,
 				C9E9294529DAC48900A6DBBF /* SceneDelegate.swift in Sources */,
