@@ -9,23 +9,31 @@
 /* Begin PBXBuildFile section */
 		C9E9294329DAC48900A6DBBF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9294229DAC48900A6DBBF /* AppDelegate.swift */; };
 		C9E9294529DAC48900A6DBBF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9294429DAC48900A6DBBF /* SceneDelegate.swift */; };
-		C9E9294729DAC48900A6DBBF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9294629DAC48900A6DBBF /* ViewController.swift */; };
-		C9E9294A29DAC48900A6DBBF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9E9294829DAC48900A6DBBF /* Main.storyboard */; };
 		C9E9294D29DAC48900A6DBBF /* MainPizzaScreen.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C9E9294B29DAC48900A6DBBF /* MainPizzaScreen.xcdatamodeld */; };
 		C9E9294F29DAC48B00A6DBBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9E9294E29DAC48B00A6DBBF /* Assets.xcassets */; };
 		C9E9295229DAC48B00A6DBBF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9E9295029DAC48B00A6DBBF /* LaunchScreen.storyboard */; };
+		C9E9296E29DAC6C700A6DBBF /* MenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9296829DAC6C700A6DBBF /* MenuPresenter.swift */; };
+		C9E9296F29DAC6C700A6DBBF /* MenuWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9296929DAC6C700A6DBBF /* MenuWorker.swift */; };
+		C9E9297029DAC6C700A6DBBF /* MenuRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9296A29DAC6C700A6DBBF /* MenuRouter.swift */; };
+		C9E9297129DAC6C700A6DBBF /* MenuModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9296B29DAC6C700A6DBBF /* MenuModels.swift */; };
+		C9E9297229DAC6C700A6DBBF /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9296C29DAC6C700A6DBBF /* MenuViewController.swift */; };
+		C9E9297329DAC6C700A6DBBF /* MenuInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9296D29DAC6C700A6DBBF /* MenuInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C9E9293F29DAC48900A6DBBF /* MainPizzaScreen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MainPizzaScreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9E9294229DAC48900A6DBBF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9E9294429DAC48900A6DBBF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C9E9294629DAC48900A6DBBF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		C9E9294929DAC48900A6DBBF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C9E9294C29DAC48900A6DBBF /* MainPizzaScreen.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MainPizzaScreen.xcdatamodel; sourceTree = "<group>"; };
 		C9E9294E29DAC48B00A6DBBF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C9E9295129DAC48B00A6DBBF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C9E9295329DAC48B00A6DBBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C9E9296829DAC6C700A6DBBF /* MenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPresenter.swift; sourceTree = "<group>"; };
+		C9E9296929DAC6C700A6DBBF /* MenuWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuWorker.swift; sourceTree = "<group>"; };
+		C9E9296A29DAC6C700A6DBBF /* MenuRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRouter.swift; sourceTree = "<group>"; };
+		C9E9296B29DAC6C700A6DBBF /* MenuModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuModels.swift; sourceTree = "<group>"; };
+		C9E9296C29DAC6C700A6DBBF /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		C9E9296D29DAC6C700A6DBBF /* MenuInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,14 +68,34 @@
 			children = (
 				C9E9294229DAC48900A6DBBF /* AppDelegate.swift */,
 				C9E9294429DAC48900A6DBBF /* SceneDelegate.swift */,
-				C9E9294629DAC48900A6DBBF /* ViewController.swift */,
-				C9E9294829DAC48900A6DBBF /* Main.storyboard */,
+				C9E9295929DAC4F300A6DBBF /* Modules */,
 				C9E9294E29DAC48B00A6DBBF /* Assets.xcassets */,
 				C9E9295029DAC48B00A6DBBF /* LaunchScreen.storyboard */,
 				C9E9295329DAC48B00A6DBBF /* Info.plist */,
 				C9E9294B29DAC48900A6DBBF /* MainPizzaScreen.xcdatamodeld */,
 			);
 			path = MainPizzaScreen;
+			sourceTree = "<group>";
+		};
+		C9E9295929DAC4F300A6DBBF /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				C9E9296729DAC6B900A6DBBF /* Menu */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		C9E9296729DAC6B900A6DBBF /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				C9E9296829DAC6C700A6DBBF /* MenuPresenter.swift */,
+				C9E9296929DAC6C700A6DBBF /* MenuWorker.swift */,
+				C9E9296A29DAC6C700A6DBBF /* MenuRouter.swift */,
+				C9E9296B29DAC6C700A6DBBF /* MenuModels.swift */,
+				C9E9296C29DAC6C700A6DBBF /* MenuViewController.swift */,
+				C9E9296D29DAC6C700A6DBBF /* MenuInteractor.swift */,
+			);
+			path = Menu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -130,7 +158,6 @@
 			files = (
 				C9E9295229DAC48B00A6DBBF /* LaunchScreen.storyboard in Resources */,
 				C9E9294F29DAC48B00A6DBBF /* Assets.xcassets in Resources */,
-				C9E9294A29DAC48900A6DBBF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,24 +168,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C9E9294729DAC48900A6DBBF /* ViewController.swift in Sources */,
+				C9E9297329DAC6C700A6DBBF /* MenuInteractor.swift in Sources */,
 				C9E9294329DAC48900A6DBBF /* AppDelegate.swift in Sources */,
 				C9E9294529DAC48900A6DBBF /* SceneDelegate.swift in Sources */,
+				C9E9296F29DAC6C700A6DBBF /* MenuWorker.swift in Sources */,
 				C9E9294D29DAC48900A6DBBF /* MainPizzaScreen.xcdatamodeld in Sources */,
+				C9E9296E29DAC6C700A6DBBF /* MenuPresenter.swift in Sources */,
+				C9E9297129DAC6C700A6DBBF /* MenuModels.swift in Sources */,
+				C9E9297029DAC6C700A6DBBF /* MenuRouter.swift in Sources */,
+				C9E9297229DAC6C700A6DBBF /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		C9E9294829DAC48900A6DBBF /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C9E9294929DAC48900A6DBBF /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		C9E9295029DAC48B00A6DBBF /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -220,7 +244,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -274,7 +298,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -295,9 +319,8 @@
 				INFOPLIST_FILE = MainPizzaScreen/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -305,9 +328,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = sports.MainPizzaScreen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -322,9 +348,8 @@
 				INFOPLIST_FILE = MainPizzaScreen/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -332,9 +357,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = sports.MainPizzaScreen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
