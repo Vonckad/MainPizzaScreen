@@ -20,11 +20,34 @@ protocol MenuDisplayLogic: AnyObject
 class MenuViewController: UIViewController, MenuDisplayLogic
 {
     
-    private lazy var menuCollectionView: UICollectionView = {
-        let collectionView = UICollectionView()
+    private let menuController = MenuController()
+    
+    enum Section: Int, Hashable, CaseIterable, CustomStringConvertible {
+        case advertisement, menu
         
+        var description: String {
+            switch self {
+            case .advertisement: return "Advertisement"
+            case .menu: return "Menu"
+            }
+        }
+    }
+    
+    private lazy var menuCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: view.frame, collectionViewLayout: createLayout())
+        collectionView.delegate = self
+        collectionView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        view.addSubview(collectionView)
         return collectionView
     }()
+    
+    private let filterHeaderRegistration = UICollectionView.SupplementaryRegistration
+    <FilterView>(elementKind: "sectionHeaderElementKind") {
+        (supplementaryView, string, indexPath) in
+    }
+    
+    var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>! = nil
+    var currentSnapshot: NSDiffableDataSourceSnapshot<Section, AnyHashable>! = nil
     
   var interactor: MenuBusinessLogic?
   var router: (NSObjectProtocol & MenuRoutingLogic & MenuDataPassing)?
@@ -76,7 +99,9 @@ class MenuViewController: UIViewController, MenuDisplayLogic
   override func viewDidLoad()
   {
     super.viewDidLoad()
+//      navigationController?.navigationBar.isOpaque = true
       view.backgroundColor = .green
+      configureDataSource()
     doSomething()
   }
     
@@ -99,4 +124,130 @@ class MenuViewController: UIViewController, MenuDisplayLogic
   {
     //nameTextField.text = viewModel.name
   }
+}
+
+//MARK: - UICollectionViewDelegate
+extension MenuViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) { }
+}
+
+//MARK: - UICollectionViewLayout
+extension MenuViewController {
+    func createLayout() -> UICollectionViewLayout {
+        let sectionProvider = { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+            
+            guard let sectionKind = Section(rawValue: sectionIndex) else { return nil }
+            
+            let section: NSCollectionLayoutSection
+            
+            if sectionKind == .advertisement {
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                      heightDimension: .absolute(100.0))
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8),
+                                                       heightDimension: .absolute(123.0))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                group.contentInsets.leading = 10
+                
+                section = NSCollectionLayoutSection(group: group)
+                section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+                section.contentInsets = .init(top: 0, leading: 10, bottom: 0, trailing: 20)
+                
+            } else if sectionKind == .menu {
+                
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                      heightDimension: .fractionalHeight(1.0))
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                       heightDimension: .absolute(132.0))
+                let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+                
+                section = NSCollectionLayoutSection(group: group)
+                section.orthogonalScrollingBehavior = .none
+                section.interGroupSpacing = 10
+                section.contentInsets.top = 10
+                
+                let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+                    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                      heightDimension: .estimated(60)),
+                    elementKind: "sectionHeaderElementKind",
+                    alignment: .top)
+                sectionHeader.pinToVisibleBounds = true
+                section.boundarySupplementaryItems = [sectionHeader]
+                
+                let backgroundItem = NSCollectionLayoutDecorationItem.background(elementKind: "background")
+                backgroundItem.contentInsets = NSDirectionalEdgeInsets(top: 60, leading: 0, bottom: 0, trailing: 0)
+                section.decorationItems = [backgroundItem]
+            } else {
+                fatalError("unknown section")
+            }
+            
+            return section
+        }
+
+        let config = UICollectionViewCompositionalLayoutConfiguration()
+
+        let layout = UICollectionViewCompositionalLayout(sectionProvider: sectionProvider,
+                                                         configuration: config)
+        layout.register(BackgroundSupplementaryView.self, forDecorationViewOfKind: "background")
+        return layout
+    }
+}
+
+//MARK: - dataSource, currentSnapshot
+extension MenuViewController {
+    private func createAdvertisementCellRegistration() -> UICollectionView.CellRegistration<AdvertisementCollectionViewCell, MenuController.Advertisement> {
+        return UICollectionView.CellRegistration<AdvertisementCollectionViewCell, MenuController.Advertisement> { (cell, indexPath, advertisement) in
+            cell.imageView.image = UIImage(named: advertisement.title)
+        }
+    }
+    
+    private func createMenuCellRegistration() -> UICollectionView.CellRegistration<MenuCollectionViewCell, MenuController.MenuItem> {
+        return UICollectionView.CellRegistration<MenuCollectionViewCell, MenuController.MenuItem> { (cell, indexPath, menuItem) in
+            cell.titleLabel.text = menuItem.title
+            cell.categoryLabel.text = menuItem.category
+        }
+    }
+    
+    private func configureDataSource() {
+        let advertisementCellRegistration = createAdvertisementCellRegistration()
+        let menuCellRegistration = createMenuCellRegistration()
+        
+        dataSource = UICollectionViewDiffableDataSource
+        <Section, AnyHashable>(collectionView: menuCollectionView) {
+            (collectionView: UICollectionView, indexPath: IndexPath, item: AnyHashable) -> UICollectionViewCell? in
+            
+            guard let section = Section(rawValue: indexPath.section) else { fatalError("Unknown section") }
+            
+            switch section {
+            case .advertisement:
+                return collectionView.dequeueConfiguredReusableCell(using: advertisementCellRegistration, for: indexPath, item: item as? MenuController.Advertisement)
+            case .menu:
+                return collectionView.dequeueConfiguredReusableCell(using: menuCellRegistration, for: indexPath, item: item as? MenuController.MenuItem)
+            }
+        }
+        
+        dataSource.supplementaryViewProvider = { (view, kind, index) in
+            return self.menuCollectionView.dequeueConfiguredReusableSupplementary(using: self.filterHeaderRegistration, for: index)
+        }
+        
+        updateCurrentSnapshot()
+        dataSource.apply(currentSnapshot, animatingDifferences: false)
+    }
+    
+    private func updateCurrentSnapshot() {
+        currentSnapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
+        Section.allCases.forEach { (sectionKind) in
+            switch sectionKind {
+            case .advertisement:
+                currentSnapshot.appendSections([.advertisement])
+                currentSnapshot.appendItems(menuController.advertisements)
+            case .menu:
+                currentSnapshot.appendSections([.menu])
+                currentSnapshot.appendItems(menuController.menuItems.last!.menuItems)
+            }
+        }
+    }
 }

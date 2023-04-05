@@ -22,6 +22,14 @@
 		C9E9297D29DAD04F00A6DBBF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9297C29DAD04F00A6DBBF /* ProfileViewController.swift */; };
 		C9E9298029DAD08900A6DBBF /* BasketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9297F29DAD08900A6DBBF /* BasketViewController.swift */; };
 		C9E9298329DAD13000A6DBBF /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9298229DAD13000A6DBBF /* ContactsViewController.swift */; };
+		C9E9298629DAD51500A6DBBF /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9298529DAD51500A6DBBF /* MenuCollectionViewCell.swift */; };
+		C9E9298829DAD54800A6DBBF /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9298729DAD54800A6DBBF /* MenuController.swift */; };
+		C9E9298A29DD8E5100A6DBBF /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9298929DD8E5100A6DBBF /* FilterView.swift */; };
+		C9E9298C29DD934300A6DBBF /* FilterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9298B29DD934300A6DBBF /* FilterCollectionViewCell.swift */; };
+		C9E9298F29DDAEFB00A6DBBF /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9298E29DDAEFB00A6DBBF /* UIView+Extension.swift */; };
+		C9E9299229DDB11400A6DBBF /* ColorHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9299129DDB11400A6DBBF /* ColorHex.swift */; };
+		C9E9299529DE00E700A6DBBF /* BackgroundSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9299429DE00E700A6DBBF /* BackgroundSupplementaryView.swift */; };
+		C9E9299829DE062000A6DBBF /* AdvertisementCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9299729DE062000A6DBBF /* AdvertisementCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +50,14 @@
 		C9E9297C29DAD04F00A6DBBF /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		C9E9297F29DAD08900A6DBBF /* BasketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketViewController.swift; sourceTree = "<group>"; };
 		C9E9298229DAD13000A6DBBF /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
+		C9E9298529DAD51500A6DBBF /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
+		C9E9298729DAD54800A6DBBF /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
+		C9E9298929DD8E5100A6DBBF /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		C9E9298B29DD934300A6DBBF /* FilterCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCollectionViewCell.swift; sourceTree = "<group>"; };
+		C9E9298E29DDAEFB00A6DBBF /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		C9E9299129DDB11400A6DBBF /* ColorHex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHex.swift; sourceTree = "<group>"; };
+		C9E9299429DE00E700A6DBBF /* BackgroundSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundSupplementaryView.swift; sourceTree = "<group>"; };
+		C9E9299729DE062000A6DBBF /* AdvertisementCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +93,7 @@
 				C9E9294229DAC48900A6DBBF /* AppDelegate.swift */,
 				C9E9294429DAC48900A6DBBF /* SceneDelegate.swift */,
 				C9E9295929DAC4F300A6DBBF /* Modules */,
+				C9E9298D29DDAEE500A6DBBF /* Extentions */,
 				C9E9294E29DAC48B00A6DBBF /* Assets.xcassets */,
 				C9E9295029DAC48B00A6DBBF /* LaunchScreen.storyboard */,
 				C9E9295329DAC48B00A6DBBF /* Info.plist */,
@@ -100,12 +117,14 @@
 		C9E9296729DAC6B900A6DBBF /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				C9E9298429DAD50400A6DBBF /* views */,
 				C9E9296829DAC6C700A6DBBF /* MenuPresenter.swift */,
 				C9E9296929DAC6C700A6DBBF /* MenuWorker.swift */,
 				C9E9296A29DAC6C700A6DBBF /* MenuRouter.swift */,
 				C9E9296B29DAC6C700A6DBBF /* MenuModels.swift */,
 				C9E9296C29DAC6C700A6DBBF /* MenuViewController.swift */,
 				C9E9296D29DAC6C700A6DBBF /* MenuInteractor.swift */,
+				C9E9298729DAD54800A6DBBF /* MenuController.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -140,6 +159,43 @@
 				C9E9298229DAD13000A6DBBF /* ContactsViewController.swift */,
 			);
 			path = Contacts;
+			sourceTree = "<group>";
+		};
+		C9E9298429DAD50400A6DBBF /* views */ = {
+			isa = PBXGroup;
+			children = (
+				C9E9299629DE012300A6DBBF /* ReusableViews */,
+				C9E9299329DE00A300A6DBBF /* cells */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		C9E9298D29DDAEE500A6DBBF /* Extentions */ = {
+			isa = PBXGroup;
+			children = (
+				C9E9298E29DDAEFB00A6DBBF /* UIView+Extension.swift */,
+				C9E9299129DDB11400A6DBBF /* ColorHex.swift */,
+			);
+			path = Extentions;
+			sourceTree = "<group>";
+		};
+		C9E9299329DE00A300A6DBBF /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				C9E9298529DAD51500A6DBBF /* MenuCollectionViewCell.swift */,
+				C9E9298B29DD934300A6DBBF /* FilterCollectionViewCell.swift */,
+				C9E9299729DE062000A6DBBF /* AdvertisementCollectionViewCell.swift */,
+			);
+			path = cells;
+			sourceTree = "<group>";
+		};
+		C9E9299629DE012300A6DBBF /* ReusableViews */ = {
+			isa = PBXGroup;
+			children = (
+				C9E9298929DD8E5100A6DBBF /* FilterView.swift */,
+				C9E9299429DE00E700A6DBBF /* BackgroundSupplementaryView.swift */,
+			);
+			path = ReusableViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,16 +268,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9E9298829DAD54800A6DBBF /* MenuController.swift in Sources */,
 				C9E9297329DAC6C700A6DBBF /* MenuInteractor.swift in Sources */,
 				C9E9298329DAD13000A6DBBF /* ContactsViewController.swift in Sources */,
+				C9E9299829DE062000A6DBBF /* AdvertisementCollectionViewCell.swift in Sources */,
 				C9E9298029DAD08900A6DBBF /* BasketViewController.swift in Sources */,
 				C9E9294329DAC48900A6DBBF /* AppDelegate.swift in Sources */,
 				C9E9294529DAC48900A6DBBF /* SceneDelegate.swift in Sources */,
 				C9E9296F29DAC6C700A6DBBF /* MenuWorker.swift in Sources */,
 				C9E9294D29DAC48900A6DBBF /* MainPizzaScreen.xcdatamodeld in Sources */,
 				C9E9297D29DAD04F00A6DBBF /* ProfileViewController.swift in Sources */,
+				C9E9298C29DD934300A6DBBF /* FilterCollectionViewCell.swift in Sources */,
 				C9E9297629DACACA00A6DBBF /* MainTabBarViewController.swift in Sources */,
+				C9E9298629DAD51500A6DBBF /* MenuCollectionViewCell.swift in Sources */,
+				C9E9299529DE00E700A6DBBF /* BackgroundSupplementaryView.swift in Sources */,
+				C9E9299229DDB11400A6DBBF /* ColorHex.swift in Sources */,
 				C9E9296E29DAC6C700A6DBBF /* MenuPresenter.swift in Sources */,
+				C9E9298A29DD8E5100A6DBBF /* FilterView.swift in Sources */,
+				C9E9298F29DDAEFB00A6DBBF /* UIView+Extension.swift in Sources */,
 				C9E9297129DAC6C700A6DBBF /* MenuModels.swift in Sources */,
 				C9E9297029DAC6C700A6DBBF /* MenuRouter.swift in Sources */,
 				C9E9297229DAC6C700A6DBBF /* MenuViewController.swift in Sources */,
