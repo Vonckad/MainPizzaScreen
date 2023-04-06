@@ -20,8 +20,6 @@ protocol MenuDisplayLogic: AnyObject
 class MenuViewController: UIViewController, MenuDisplayLogic
 {
     
-//    private let menuController = MenuController()
-    
     enum Section: Int, Hashable, CaseIterable, CustomStringConvertible {
         case advertisement, menu
         
@@ -100,21 +98,19 @@ class MenuViewController: UIViewController, MenuDisplayLogic
   override func viewDidLoad()
   {
     super.viewDidLoad()
-//      navigationController?.navigationBar.isOpaque = true
-      view.backgroundColor = .green
       configureDataSource()
       requestProducts()
   }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.barTintColor = UIColor(white: 0.95, alpha: 1)
         tabBarController?.tabBar.backgroundColor = .white
     }
   
   // MARK: Do something
-  
-  //@IBOutlet weak var nameTextField: UITextField!
-  
   func requestProducts()
   {
       interactor?.doInteractor(request: .getProducts)
@@ -166,7 +162,7 @@ extension MenuViewController {
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                       heightDimension: .absolute(132.0))
+                                                       heightDimension: .estimated(230.0))
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
                 
                 section = NSCollectionLayoutSection(group: group)
@@ -211,6 +207,7 @@ extension MenuViewController {
     
     private func createMenuCellRegistration() -> UICollectionView.CellRegistration<MenuCollectionViewCell, MenuController.MenuItem> {
         return UICollectionView.CellRegistration<MenuCollectionViewCell, MenuController.MenuItem> { (cell, indexPath, menuItem) in
+            cell.clipsToBounds = true
             cell.setupData(item: menuItem)
         }
     }

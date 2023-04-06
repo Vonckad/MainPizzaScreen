@@ -12,6 +12,7 @@ class MainTabBarViewController: UITabBarController {
     // MARK: View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(white: 0.95, alpha: 1)
         setViewControllers([createNavController(for: MenuViewController(),
                                                 title: "Меню", image: UIImage(named: "Menu")),
                            createNavController(for: ContactsViewController(),

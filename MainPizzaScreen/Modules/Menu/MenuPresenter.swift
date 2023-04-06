@@ -39,7 +39,11 @@ class MenuPresenter: MenuPresentationLogic
         let menuController = MenuController()
         var menuItems: [MenuController.MenuItem] {
             get {
-                return products.map { MenuController.MenuItem(title: $0.title, category: $0.category, imageUrl: $0.image)}
+                return products.map { MenuController.MenuItem(title: $0.title,
+                                                              category: $0.category,
+                                                              imageUrl: $0.image,
+                                                              description: $0.description,
+                                                              price: $0.price)}
             }
         }
         menuController.addMenuItems(menuItems: menuItems)

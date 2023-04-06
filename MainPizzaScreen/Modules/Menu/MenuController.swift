@@ -16,7 +16,8 @@ class MenuController {
         let title: String
         let category: String
         let imageUrl: String
-//        let 
+        let description: String
+        let price: Float
         let identifier = UUID()
         func hash(into hasher: inout Hasher) {
             hasher.combine(identifier)
