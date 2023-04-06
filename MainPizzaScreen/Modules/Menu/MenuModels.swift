@@ -16,16 +16,25 @@ enum Menu
 {
   // MARK: Use cases
   
-  enum Something
+  enum Facestore
   {
     struct Request
     {
+        enum RequestType {
+            case getProducts
+        }
     }
     struct Response
     {
+        enum ResponseType {
+            case presentProducts(_ : Data?)
+        }
     }
     struct ViewModel
     {
+        enum viewModelData {
+            case products(_ : MenuController)
+        }
     }
   }
 }

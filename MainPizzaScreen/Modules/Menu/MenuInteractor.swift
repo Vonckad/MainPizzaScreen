@@ -14,7 +14,7 @@ import UIKit
 
 protocol MenuBusinessLogic
 {
-  func doSomething(request: Menu.Something.Request)
+    func doInteractor(request: Menu.Facestore.Request.RequestType)
 }
 
 protocol MenuDataStore
@@ -26,16 +26,20 @@ class MenuInteractor: MenuBusinessLogic, MenuDataStore
 {
   var presenter: MenuPresentationLogic?
   var worker: MenuWorker?
-  //var name: String = ""
+  private let servise: ServiceProtocol = Service()
   
   // MARK: Do something
   
-  func doSomething(request: Menu.Something.Request)
+    func doInteractor(request: Menu.Facestore.Request.RequestType)
   {
     worker = MenuWorker()
     worker?.doSomeWork()
     
-    let response = Menu.Something.Response()
-    presenter?.presentSomething(response: response)
+      switch request {
+      case .getProducts:
+          servise.requestProducts { [weak self] data, error in
+              self?.presenter?.presentResults(response: .presentProducts(data))
+          }
+      }
   }
 }

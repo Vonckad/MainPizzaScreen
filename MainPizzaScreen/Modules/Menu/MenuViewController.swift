@@ -14,13 +14,13 @@ import UIKit
 
 protocol MenuDisplayLogic: AnyObject
 {
-  func displaySomething(viewModel: Menu.Something.ViewModel)
+    func displayProducts(viewModel: Menu.Facestore.ViewModel.viewModelData)
 }
 
 class MenuViewController: UIViewController, MenuDisplayLogic
 {
     
-    private let menuController = MenuController()
+//    private let menuController = MenuController()
     
     enum Section: Int, Hashable, CaseIterable, CustomStringConvertible {
         case advertisement, menu
@@ -102,7 +102,7 @@ class MenuViewController: UIViewController, MenuDisplayLogic
 //      navigationController?.navigationBar.isOpaque = true
       view.backgroundColor = .green
       configureDataSource()
-    doSomething()
+      requestProducts()
   }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -114,15 +114,17 @@ class MenuViewController: UIViewController, MenuDisplayLogic
   
   //@IBOutlet weak var nameTextField: UITextField!
   
-  func doSomething()
+  func requestProducts()
   {
-    let request = Menu.Something.Request()
-    interactor?.doSomething(request: request)
+      interactor?.doInteractor(request: .getProducts)
   }
   
-  func displaySomething(viewModel: Menu.Something.ViewModel)
+    func displayProducts(viewModel: Menu.Facestore.ViewModel.viewModelData)
   {
-    //nameTextField.text = viewModel.name
+      switch viewModel {
+      case .products(let menuController):
+          updateCurrentSnapshot(menuController: menuController)
+      }
   }
 }
 
@@ -200,14 +202,13 @@ extension MenuViewController {
 extension MenuViewController {
     private func createAdvertisementCellRegistration() -> UICollectionView.CellRegistration<AdvertisementCollectionViewCell, MenuController.Advertisement> {
         return UICollectionView.CellRegistration<AdvertisementCollectionViewCell, MenuController.Advertisement> { (cell, indexPath, advertisement) in
-            cell.imageView.image = UIImage(named: advertisement.title)
+            cell.imageView.image = UIImage(named: advertisement.imageName)
         }
     }
     
     private func createMenuCellRegistration() -> UICollectionView.CellRegistration<MenuCollectionViewCell, MenuController.MenuItem> {
         return UICollectionView.CellRegistration<MenuCollectionViewCell, MenuController.MenuItem> { (cell, indexPath, menuItem) in
-            cell.titleLabel.text = menuItem.title
-            cell.categoryLabel.text = menuItem.category
+            cell.setupData(item: menuItem)
         }
     }
     
@@ -232,12 +233,9 @@ extension MenuViewController {
         dataSource.supplementaryViewProvider = { (view, kind, index) in
             return self.menuCollectionView.dequeueConfiguredReusableSupplementary(using: self.filterHeaderRegistration, for: index)
         }
-        
-        updateCurrentSnapshot()
-        dataSource.apply(currentSnapshot, animatingDifferences: false)
     }
     
-    private func updateCurrentSnapshot() {
+    private func updateCurrentSnapshot(menuController: MenuController) {
         currentSnapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
         Section.allCases.forEach { (sectionKind) in
             switch sectionKind {
@@ -249,5 +247,7 @@ extension MenuViewController {
                 currentSnapshot.appendItems(menuController.menuItems.last!.menuItems)
             }
         }
+        
+        dataSource.apply(currentSnapshot, animatingDifferences: true)
     }
 }

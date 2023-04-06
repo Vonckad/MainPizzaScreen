@@ -30,6 +30,10 @@
 		C9E9299229DDB11400A6DBBF /* ColorHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9299129DDB11400A6DBBF /* ColorHex.swift */; };
 		C9E9299529DE00E700A6DBBF /* BackgroundSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9299429DE00E700A6DBBF /* BackgroundSupplementaryView.swift */; };
 		C9E9299829DE062000A6DBBF /* AdvertisementCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9299729DE062000A6DBBF /* AdvertisementCollectionViewCell.swift */; };
+		C9E9299B29DEEC2700A6DBBF /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9299A29DEEC2700A6DBBF /* Service.swift */; };
+		C9E9299D29DEEE9900A6DBBF /* ServiceFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9299C29DEEE9900A6DBBF /* ServiceFetcher.swift */; };
+		C9E929A029DEEF0F00A6DBBF /* NetProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9299F29DEEF0F00A6DBBF /* NetProductModel.swift */; };
+		C9E929A329DEFCB300A6DBBF /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = C9E929A229DEFCB300A6DBBF /* SDWebImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +62,9 @@
 		C9E9299129DDB11400A6DBBF /* ColorHex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHex.swift; sourceTree = "<group>"; };
 		C9E9299429DE00E700A6DBBF /* BackgroundSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundSupplementaryView.swift; sourceTree = "<group>"; };
 		C9E9299729DE062000A6DBBF /* AdvertisementCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementCollectionViewCell.swift; sourceTree = "<group>"; };
+		C9E9299A29DEEC2700A6DBBF /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		C9E9299C29DEEE9900A6DBBF /* ServiceFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFetcher.swift; sourceTree = "<group>"; };
+		C9E9299F29DEEF0F00A6DBBF /* NetProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetProductModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9E929A329DEFCB300A6DBBF /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +100,8 @@
 			children = (
 				C9E9294229DAC48900A6DBBF /* AppDelegate.swift */,
 				C9E9294429DAC48900A6DBBF /* SceneDelegate.swift */,
+				C9E9299E29DEEEF200A6DBBF /* Models */,
+				C9E9299929DEEC1700A6DBBF /* Network */,
 				C9E9295929DAC4F300A6DBBF /* Modules */,
 				C9E9298D29DDAEE500A6DBBF /* Extentions */,
 				C9E9294E29DAC48B00A6DBBF /* Assets.xcassets */,
@@ -198,6 +208,23 @@
 			path = ReusableViews;
 			sourceTree = "<group>";
 		};
+		C9E9299929DEEC1700A6DBBF /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				C9E9299A29DEEC2700A6DBBF /* Service.swift */,
+				C9E9299C29DEEE9900A6DBBF /* ServiceFetcher.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		C9E9299E29DEEEF200A6DBBF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C9E9299F29DEEF0F00A6DBBF /* NetProductModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -214,6 +241,9 @@
 			dependencies = (
 			);
 			name = MainPizzaScreen;
+			packageProductDependencies = (
+				C9E929A229DEFCB300A6DBBF /* SDWebImage */,
+			);
 			productName = MainPizzaScreen;
 			productReference = C9E9293F29DAC48900A6DBBF /* MainPizzaScreen.app */;
 			productType = "com.apple.product-type.application";
@@ -242,6 +272,9 @@
 				Base,
 			);
 			mainGroup = C9E9293629DAC48900A6DBBF;
+			packageReferences = (
+				C9E929A129DEFCB300A6DBBF /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = C9E9294029DAC48900A6DBBF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -276,6 +309,7 @@
 				C9E9294329DAC48900A6DBBF /* AppDelegate.swift in Sources */,
 				C9E9294529DAC48900A6DBBF /* SceneDelegate.swift in Sources */,
 				C9E9296F29DAC6C700A6DBBF /* MenuWorker.swift in Sources */,
+				C9E9299D29DEEE9900A6DBBF /* ServiceFetcher.swift in Sources */,
 				C9E9294D29DAC48900A6DBBF /* MainPizzaScreen.xcdatamodeld in Sources */,
 				C9E9297D29DAD04F00A6DBBF /* ProfileViewController.swift in Sources */,
 				C9E9298C29DD934300A6DBBF /* FilterCollectionViewCell.swift in Sources */,
@@ -284,9 +318,11 @@
 				C9E9299529DE00E700A6DBBF /* BackgroundSupplementaryView.swift in Sources */,
 				C9E9299229DDB11400A6DBBF /* ColorHex.swift in Sources */,
 				C9E9296E29DAC6C700A6DBBF /* MenuPresenter.swift in Sources */,
+				C9E929A029DEEF0F00A6DBBF /* NetProductModel.swift in Sources */,
 				C9E9298A29DD8E5100A6DBBF /* FilterView.swift in Sources */,
 				C9E9298F29DDAEFB00A6DBBF /* UIView+Extension.swift in Sources */,
 				C9E9297129DAC6C700A6DBBF /* MenuModels.swift in Sources */,
+				C9E9299B29DEEC2700A6DBBF /* Service.swift in Sources */,
 				C9E9297029DAC6C700A6DBBF /* MenuRouter.swift in Sources */,
 				C9E9297229DAC6C700A6DBBF /* MenuViewController.swift in Sources */,
 			);
@@ -500,6 +536,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C9E929A129DEFCB300A6DBBF /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C9E929A229DEFCB300A6DBBF /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C9E929A129DEFCB300A6DBBF /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		C9E9294B29DAC48900A6DBBF /* MainPizzaScreen.xcdatamodeld */ = {

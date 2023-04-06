@@ -14,18 +14,30 @@ import UIKit
 
 protocol MenuPresentationLogic
 {
-  func presentSomething(response: Menu.Something.Response)
+    func presentResults(response: Menu.Facestore.Response.ResponseType)
 }
 
 class MenuPresenter: MenuPresentationLogic
 {
   weak var viewController: MenuDisplayLogic?
-  
+    private let serviceFetcher: ServiceFetcherProtocol = ServiceFetcher()
   // MARK: Do something
   
-  func presentSomething(response: Menu.Something.Response)
+    func presentResults(response: Menu.Facestore.Response.ResponseType)
   {
-    let viewModel = Menu.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
+      switch response {
+      case .presentProducts(let data):
+          serviceFetcher.fetchProducts(data: data) { [weak self] response in
+              guard let products = response else { return }
+              let menuController = MenuController()
+              var menuItems: [MenuController.MenuItem] {
+                  get {
+                      return products.map { MenuController.MenuItem(title: $0.title, category: $0.category, imageUrl: $0.image)}
+                  }
+              }
+              menuController.addMenuItems(menuItems: menuItems)
+              self?.viewController?.displayProducts(viewModel: .products(menuController))
+          }
+      }
   }
 }
