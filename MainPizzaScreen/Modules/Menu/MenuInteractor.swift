@@ -19,7 +19,7 @@ protocol MenuBusinessLogic
 
 protocol MenuDataStore
 {
-  //var name: String { get set }
+  
 }
 
 class MenuInteractor: MenuBusinessLogic, MenuDataStore

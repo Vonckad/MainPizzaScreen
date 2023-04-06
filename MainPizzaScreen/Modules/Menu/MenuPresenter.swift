@@ -19,25 +19,36 @@ protocol MenuPresentationLogic
 
 class MenuPresenter: MenuPresentationLogic
 {
-  weak var viewController: MenuDisplayLogic?
+    weak var viewController: MenuDisplayLogic?
     private let serviceFetcher: ServiceFetcherProtocol = ServiceFetcher()
-  // MARK: Do something
-  
+    // MARK: Do something
+    
     func presentResults(response: Menu.Facestore.Response.ResponseType)
-  {
-      switch response {
-      case .presentProducts(let data):
-          serviceFetcher.fetchProducts(data: data) { [weak self] response in
-              guard let products = response else { return }
-              let menuController = MenuController()
-              var menuItems: [MenuController.MenuItem] {
-                  get {
-                      return products.map { MenuController.MenuItem(title: $0.title, category: $0.category, imageUrl: $0.image)}
-                  }
-              }
-              menuController.addMenuItems(menuItems: menuItems)
-              self?.viewController?.displayProducts(viewModel: .products(menuController))
-          }
-      }
-  }
+    {
+        switch response {
+        case .presentProducts(let data):
+            serviceFetcher.fetchProducts(data: data) { [weak self] response in
+                guard let products = response else { return }
+                guard let menuController = self?.createMenuController(products: products) else { return }
+                self?.viewController?.displayProducts(viewModel: .products(menuController.0, category:  menuController.1))
+            }
+        }
+    }
+    
+    private func createMenuController(products: [NetProductModel]) -> (MenuController, [FilterItem]) {
+        let menuController = MenuController()
+        var menuItems: [MenuController.MenuItem] {
+            get {
+                return products.map { MenuController.MenuItem(title: $0.title, category: $0.category, imageUrl: $0.image)}
+            }
+        }
+        menuController.addMenuItems(menuItems: menuItems)
+        
+        var category: [FilterItem] = []
+        for (index, item) in products.enumerated() where !category.contains(where: {$0.title == item.category}) {
+            category.append(.init(title: item.category, selected: index == 0))
+        }
+        
+        return (menuController, category)
+    }
 }

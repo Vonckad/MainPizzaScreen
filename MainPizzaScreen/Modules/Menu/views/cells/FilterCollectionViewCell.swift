@@ -9,29 +9,20 @@ import UIKit
 
 class FilterCollectionViewCell: UICollectionViewCell {
     
-    private var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
+        addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10.0),
+            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10.0),
+            label.topAnchor.constraint(equalTo: topAnchor, constant: 4.0),
+            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4.0)
+        ])
         label.font = .systemFont(ofSize: 15.0, weight: .bold)
         label.textAlignment = .center
         return label
     }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        addSubview(titleLabel)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            titleLabel.topAnchor.constraint(equalTo: topAnchor),
-            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     private let selectedBackgroundColor = UIColor(hexString: "FD3A69", alpha: 0.2)
     private let redTextColor = UIColor(hexString: "FD3A69")

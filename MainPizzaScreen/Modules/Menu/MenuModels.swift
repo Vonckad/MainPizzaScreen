@@ -12,29 +12,26 @@
 
 import UIKit
 
-enum Menu
-{
-  // MARK: Use cases
-  
-  enum Facestore
-  {
-    struct Request
-    {
-        enum RequestType {
-            case getProducts
+enum Menu {
+    
+    // MARK: Use cases
+    enum Facestore {
+        struct Request {
+            enum RequestType {
+                case getProducts
+            }
+        }
+        
+        struct Response {
+            enum ResponseType {
+                case presentProducts(_ : Data?)
+            }
+        }
+        
+        struct ViewModel {
+            enum viewModelData {
+                case products(_ : MenuController, category: [FilterItem])
+            }
         }
     }
-    struct Response
-    {
-        enum ResponseType {
-            case presentProducts(_ : Data?)
-        }
-    }
-    struct ViewModel
-    {
-        enum viewModelData {
-            case products(_ : MenuController)
-        }
-    }
-  }
 }

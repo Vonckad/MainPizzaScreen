@@ -44,6 +44,7 @@ class MenuViewController: UIViewController, MenuDisplayLogic
     private let filterHeaderRegistration = UICollectionView.SupplementaryRegistration
     <FilterView>(elementKind: "sectionHeaderElementKind") {
         (supplementaryView, string, indexPath) in
+        
     }
     
     var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>! = nil
@@ -122,8 +123,10 @@ class MenuViewController: UIViewController, MenuDisplayLogic
     func displayProducts(viewModel: Menu.Facestore.ViewModel.viewModelData)
   {
       switch viewModel {
-      case .products(let menuController):
+      case .products(let menuController, let category):
           updateCurrentSnapshot(menuController: menuController)
+          guard let filterView = menuCollectionView.visibleSupplementaryViews(ofKind: "sectionHeaderElementKind").first as? FilterView else { return }
+          filterView.filterItems = category
       }
   }
 }
