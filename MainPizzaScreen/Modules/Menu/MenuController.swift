@@ -33,7 +33,7 @@ class MenuController {
     }
 
     struct Menu: Hashable {
-        let menuItems: [MenuItem]
+        let items: [MenuItem]
         
         let identifier = UUID()
         func hash(into hasher: inout Hasher) {
@@ -41,8 +41,8 @@ class MenuController {
         }
     }
     
-    func addMenuItems(menuItems: [MenuItem]) {
-        _menuItems.append(Menu(menuItems: menuItems))
+    func addMenuItems(menu: Menu) {
+        _menuItems.append(menu)
     }
 
     var menuItems: [Menu] {

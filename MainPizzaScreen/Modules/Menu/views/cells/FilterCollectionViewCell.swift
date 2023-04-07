@@ -27,26 +27,30 @@ class FilterCollectionViewCell: UICollectionViewCell {
     private let selectedBackgroundColor = UIColor(hexString: "FD3A69", alpha: 0.2)
     private let redTextColor = UIColor(hexString: "FD3A69")
     
-    private enum CellState {
-        case select
-        case unSelect
-    }
-
-    private var state: CellState = .unSelect {
+    override var isSelected: Bool {
         didSet {
-            switch state {
-            case .select:
-                backgroundColor = selectedBackgroundColor
+            if self.isSelected {
+                self.contentView.backgroundColor = selectedBackgroundColor
                 titleLabel.textColor = redTextColor
-            case .unSelect:
-                backgroundColor = .clear
+            } else {
+                self.contentView.backgroundColor = .clear
                 titleLabel.textColor = selectedBackgroundColor
             }
         }
     }
     
+    //MARK: -
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        contentView.backgroundColor = .clear
+        titleLabel.textColor = selectedBackgroundColor
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func configureCell(filterItem: FilterItem) {
         titleLabel.text = filterItem.title
-        state = filterItem.selected ? .select : .unSelect
     }
 }

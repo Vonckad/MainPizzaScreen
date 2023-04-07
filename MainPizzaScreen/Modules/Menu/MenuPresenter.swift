@@ -46,13 +46,16 @@ class MenuPresenter: MenuPresentationLogic
                                                               price: $0.price)}
             }
         }
-        menuController.addMenuItems(menuItems: menuItems)
         
-        var category: [FilterItem] = []
-        for (index, item) in products.enumerated() where !category.contains(where: {$0.title == item.category}) {
-            category.append(.init(title: item.category, selected: index == 0))
+        var categories: [FilterItem] = []
+        for item in products where !categories.contains(where: {$0.title == item.category}) {
+            categories.append(.init(title: item.category))
         }
         
-        return (menuController, category)
+        for category in categories {
+            menuController.addMenuItems(menu: .init(items: menuItems.filter({$0.category == category.title})))
+        }
+        
+        return (menuController, categories)
     }
 }

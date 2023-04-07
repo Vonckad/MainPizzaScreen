@@ -9,7 +9,10 @@ import UIKit
 
 struct FilterItem {
     var title: String
-    var selected: Bool = false
+}
+
+protocol FilterViewDelegate {
+    func didSelectFilter(filterItem: FilterItem)
 }
 
 class FilterView: UICollectionReusableView {
@@ -17,8 +20,11 @@ class FilterView: UICollectionReusableView {
     var filterItems: [FilterItem] = [] {
         didSet {
             filterCollectionView.reloadData()
+            filterCollectionView.selectItem(at: .init(row: 0, section: 0), animated: false, scrollPosition: .left)
         }
     }
+    
+    var delegate: FilterViewDelegate?
     
     private lazy var filterCollectionView: UICollectionView = {
         let filterCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createFlowLayout())
@@ -49,6 +55,19 @@ class FilterView: UICollectionReusableView {
         flowLayout.estimatedItemSize = CGSize(width: 200, height: 40)
         return flowLayout
     }
+    
+    func selectedFilterItem() -> FilterItem? {
+        if let index = filterCollectionView.indexPathsForSelectedItems?.sorted().first?.row {
+            return filterItems[index]
+        } else {
+            return nil
+        }
+    }
+    
+    func selectItem(item: FilterItem?) {
+        let index = filterItems.firstIndex(where: {$0.title == item?.title})
+        filterCollectionView.selectItem(at: .init(row: index!, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+    }
 }
 
 extension FilterView: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -66,14 +85,7 @@ extension FilterView: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        for (index, _) in filterItems.enumerated() {
-            if index == indexPath.row {
-                filterItems[index].selected = true
-            } else {
-                filterItems[index].selected = false
-            }
-        }
+        delegate?.didSelectFilter(filterItem: filterItems[indexPath.row])
         filterCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
-        collectionView.reloadData()
     }
 }

@@ -32,17 +32,24 @@ class MenuViewController: UIViewController, MenuDisplayLogic
     }
     
     private lazy var menuCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: view.frame, collectionViewLayout: createLayout())
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.delegate = self
         collectionView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         view.addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+        ])
         return collectionView
     }()
     
     private let filterHeaderRegistration = UICollectionView.SupplementaryRegistration
     <FilterView>(elementKind: "sectionHeaderElementKind") {
         (supplementaryView, string, indexPath) in
-        
     }
     
     var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>! = nil
@@ -123,13 +130,16 @@ class MenuViewController: UIViewController, MenuDisplayLogic
           updateCurrentSnapshot(menuController: menuController)
           guard let filterView = menuCollectionView.visibleSupplementaryViews(ofKind: "sectionHeaderElementKind").first as? FilterView else { return }
           filterView.filterItems = category
+          filterView.delegate = self
       }
   }
 }
 
 //MARK: - UICollectionViewDelegate
 extension MenuViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) { }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("section = \(indexPath.section), row = \(indexPath.row)")
+    }
 }
 
 //MARK: - UICollectionViewLayout
@@ -155,7 +165,7 @@ extension MenuViewController {
                 section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                 section.contentInsets = .init(top: 0, leading: 10, bottom: 0, trailing: 20)
                 
-            } else if sectionKind == .menu {
+            } else if sectionKind != .advertisement {
                 
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                       heightDimension: .fractionalHeight(1.0))
@@ -167,8 +177,8 @@ extension MenuViewController {
                 
                 section = NSCollectionLayoutSection(group: group)
                 section.orthogonalScrollingBehavior = .none
-                section.interGroupSpacing = 10
-                section.contentInsets.top = 10
+                section.interGroupSpacing = 1
+//                section.contentInsets.top = 10
                 
                 let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
                     layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
@@ -178,9 +188,9 @@ extension MenuViewController {
                 sectionHeader.pinToVisibleBounds = true
                 section.boundarySupplementaryItems = [sectionHeader]
                 
-                let backgroundItem = NSCollectionLayoutDecorationItem.background(elementKind: "background")
-                backgroundItem.contentInsets = NSDirectionalEdgeInsets(top: 60, leading: 0, bottom: 0, trailing: 0)
-                section.decorationItems = [backgroundItem]
+//                let backgroundItem = NSCollectionLayoutDecorationItem.background(elementKind: "background")
+//                backgroundItem.contentInsets = NSDirectionalEdgeInsets(top: 60, leading: 0, bottom: 0, trailing: 0)
+//                section.decorationItems = [backgroundItem]
             } else {
                 fatalError("unknown section")
             }
@@ -192,7 +202,7 @@ extension MenuViewController {
 
         let layout = UICollectionViewCompositionalLayout(sectionProvider: sectionProvider,
                                                          configuration: config)
-        layout.register(BackgroundSupplementaryView.self, forDecorationViewOfKind: "background")
+//        layout.register(BackgroundSupplementaryView.self, forDecorationViewOfKind: "background")
         return layout
     }
 }
@@ -207,7 +217,13 @@ extension MenuViewController {
     
     private func createMenuCellRegistration() -> UICollectionView.CellRegistration<MenuCollectionViewCell, MenuController.MenuItem> {
         return UICollectionView.CellRegistration<MenuCollectionViewCell, MenuController.MenuItem> { (cell, indexPath, menuItem) in
+            
+            if indexPath == .init(row: 0, section: 1) {
+                cell.corneredRadius(radius: 22.0)
+                cell.layer.maskedCorners = [CACornerMask.layerMinXMinYCorner, CACornerMask.layerMaxXMinYCorner]
+            }
             cell.clipsToBounds = true
+            cell.backgroundColor = .white
             cell.setupData(item: menuItem)
         }
     }
@@ -244,10 +260,71 @@ extension MenuViewController {
                 currentSnapshot.appendItems(menuController.advertisements)
             case .menu:
                 currentSnapshot.appendSections([.menu])
-                currentSnapshot.appendItems(menuController.menuItems.last!.menuItems)
+                for menuItem in menuController.menuItems {
+                    currentSnapshot.appendItems(menuItem.items)
+                }
             }
         }
         
         dataSource.apply(currentSnapshot, animatingDifferences: true)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard let filterView = menuCollectionView.visibleSupplementaryViews(ofKind: "sectionHeaderElementKind").first as? FilterView else { return }
+        
+        if scrollView === menuCollectionView {
+            
+            guard let selectedFilter = filterView.selectedFilterItem() else {
+                print("Error ger selected filter")
+                return
+            }
+            
+            guard let topSectionIndex = self.menuCollectionView.indexPathsForVisibleItems.filter({$0.section == 1}).sorted().map({ $0.row + 1}).first else {
+                print("Error get topSectionIndex")
+                return
+            }
+            
+            print("topSectionIndex = \(topSectionIndex)")
+            print("qqqq = \(menuCollectionView.indexPathsForVisibleItems.filter({$0.section == 1}).sorted().map({ $0.row}))")
+            
+            guard let items = dataSource.snapshot(for: Section.menu).items as? [MenuController.MenuItem] else {
+                print("Error get items")
+                return
+            }
+
+            if selectedFilter.title != items[topSectionIndex].category {
+                filterView.selectItem(item: .init(title: items[topSectionIndex].category))
+            }
+//            let topSectionIndex = self.menuCollectionView.indexPathsForVisibleItems.map({ $0.section }).sorted()[1]
+//            if
+//               let selectedCollectionIndex = filterView.indexPathsForSelectedItems()?.first?.row {
+//
+//                if selectedCollectionIndex != topSectionIndex {
+//                    let indexPath = IndexPath(item: topSectionIndex, section: 0)
+//                    filterView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+//                }
+//            }
+        }
+    }
+}
+
+extension MenuViewController: FilterViewDelegate {
+    func didSelectFilter(filterItem: FilterItem) {
+        guard let items = dataSource.snapshot(for: Section.menu).items as? [MenuController.MenuItem] else {
+            print("Error get items")
+            return
+        }
+        
+        guard let item = items.first(where: {$0.category == filterItem.title}) else {
+            print("Error get 1 item")
+            return
+        }
+        
+        guard let index = dataSource.indexPath(for: item) else {
+            print("Error get index")
+            return
+        }
+        
+        menuCollectionView.scrollToItem(at: index, at: .top, animated: true)
     }
 }
