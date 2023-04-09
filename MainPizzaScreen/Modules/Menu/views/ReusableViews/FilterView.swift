@@ -7,17 +7,17 @@
 
 import UIKit
 
-struct FilterItem {
-    var title: String
-}
+//struct FilterItem {
+//    var title: String
+//}
 
 protocol FilterViewDelegate {
-    func didSelectFilter(filterItem: FilterItem)
+    func didSelectFilter(filterItem: String)
 }
 
 class FilterView: UICollectionReusableView {
     
-    var filterItems: [FilterItem] = [] {
+    var filterItems: [String] = [] {
         didSet {
             filterCollectionView.reloadData()
             filterCollectionView.selectItem(at: .init(row: 0, section: 0), animated: false, scrollPosition: .left)
@@ -56,7 +56,7 @@ class FilterView: UICollectionReusableView {
         return flowLayout
     }
     
-    func selectedFilterItem() -> FilterItem? {
+    func selectedFilterItem() -> String? {
         if let index = filterCollectionView.indexPathsForSelectedItems?.sorted().first?.row {
             return filterItems[index]
         } else {
@@ -64,8 +64,8 @@ class FilterView: UICollectionReusableView {
         }
     }
     
-    func selectItem(item: FilterItem?) {
-        let index = filterItems.firstIndex(where: {$0.title == item?.title})
+    func selectItem(item: String?) {
+        let index = filterItems.firstIndex(where: {$0 == item})
         filterCollectionView.selectItem(at: .init(row: index!, section: 0), animated: true, scrollPosition: .centeredHorizontally)
     }
 }

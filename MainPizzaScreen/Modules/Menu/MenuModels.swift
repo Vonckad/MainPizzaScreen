@@ -30,7 +30,7 @@ enum Menu {
         
         struct ViewModel {
             enum viewModelData {
-                case products(_ : MenuController, category: [FilterItem])
+                case products(_ : MenuController, category: [String])
             }
         }
     }

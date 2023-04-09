@@ -35,7 +35,7 @@ class MenuPresenter: MenuPresentationLogic
         }
     }
     
-    private func createMenuController(products: [NetProductModel]) -> (MenuController, [FilterItem]) {
+    private func createMenuController(products: [NetProductModel]) -> (MenuController, [String]) {
         let menuController = MenuController()
         var menuItems: [MenuController.MenuItem] {
             get {
@@ -47,13 +47,13 @@ class MenuPresenter: MenuPresentationLogic
             }
         }
         
-        var categories: [FilterItem] = []
-        for item in products where !categories.contains(where: {$0.title == item.category}) {
-            categories.append(.init(title: item.category))
+        var categories: [String] = []
+        for item in products where !categories.contains(where: {$0 == item.category}) {
+            categories.append(item.category)
         }
         
         for category in categories {
-            menuController.addMenuItems(menu: .init(items: menuItems.filter({$0.category == category.title})))
+            menuController.addMenuItems(menu: .init(items: menuItems.filter({$0.category == category})))
         }
         
         return (menuController, categories)

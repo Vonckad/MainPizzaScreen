@@ -50,7 +50,7 @@ class FilterCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCell(filterItem: FilterItem) {
-        titleLabel.text = filterItem.title
+    func configureCell(filterItem: String) {
+        titleLabel.text = filterItem
     }
 }

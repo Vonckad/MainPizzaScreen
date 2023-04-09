@@ -205,7 +205,6 @@ extension MenuViewController {
     private func createAdvertisementCellRegistration() -> UICollectionView.CellRegistration<AdvertisementCollectionViewCell, MenuController.Advertisement> {
         return UICollectionView.CellRegistration<AdvertisementCollectionViewCell, MenuController.Advertisement> { (cell, indexPath, advertisement) in
             cell.setupImage(image: UIImage(named: advertisement.imageName))
-            cell.backgroundColor = .green
         }
     }
     
@@ -291,8 +290,8 @@ extension MenuViewController {
                 return
             }
 
-            if selectedFilter.title != items[topSectionIndex].category {
-                filterView.selectItem(item: .init(title: items[topSectionIndex].category))
+            if selectedFilter != items[topSectionIndex].category {
+                filterView.selectItem(item: items[topSectionIndex].category)
             }
         }
     }
@@ -300,7 +299,7 @@ extension MenuViewController {
 
 //MARK: - FilterViewDelegate
 extension MenuViewController: FilterViewDelegate {
-    func didSelectFilter(filterItem: FilterItem) {
+    func didSelectFilter(filterItem: String) {
         
         isScrollNow = true
         
@@ -309,7 +308,7 @@ extension MenuViewController: FilterViewDelegate {
             return
         }
         
-        guard let item = items.first(where: {$0.category == filterItem.title}) else {
+        guard let item = items.first(where: {$0.category == filterItem}) else {
             print("Error get 1 item")
             return
         }
