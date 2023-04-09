@@ -31,6 +31,8 @@ class MenuViewController: UIViewController, MenuDisplayLogic
         }
     }
     
+    private var isScrollNow = false
+    
     private lazy var menuCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.delegate = self
@@ -178,7 +180,6 @@ extension MenuViewController {
                 section = NSCollectionLayoutSection(group: group)
                 section.orthogonalScrollingBehavior = .none
                 section.interGroupSpacing = 1
-//                section.contentInsets.top = 10
                 
                 let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
                     layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
@@ -187,10 +188,6 @@ extension MenuViewController {
                     alignment: .top)
                 sectionHeader.pinToVisibleBounds = true
                 section.boundarySupplementaryItems = [sectionHeader]
-                
-//                let backgroundItem = NSCollectionLayoutDecorationItem.background(elementKind: "background")
-//                backgroundItem.contentInsets = NSDirectionalEdgeInsets(top: 60, leading: 0, bottom: 0, trailing: 0)
-//                section.decorationItems = [backgroundItem]
             } else {
                 fatalError("unknown section")
             }
@@ -202,7 +199,6 @@ extension MenuViewController {
 
         let layout = UICollectionViewCompositionalLayout(sectionProvider: sectionProvider,
                                                          configuration: config)
-//        layout.register(BackgroundSupplementaryView.self, forDecorationViewOfKind: "background")
         return layout
     }
 }
@@ -268,11 +264,19 @@ extension MenuViewController {
         
         dataSource.apply(currentSnapshot, animatingDifferences: true)
     }
+}
+
+//MARK: - ViewScroll
+extension MenuViewController {
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        isScrollNow = false
+    }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard let filterView = menuCollectionView.visibleSupplementaryViews(ofKind: "sectionHeaderElementKind").first as? FilterView else { return }
         
-        if scrollView === menuCollectionView {
+        if scrollView === menuCollectionView && !isScrollNow {
             
             guard let selectedFilter = filterView.selectedFilterItem() else {
                 print("Error ger selected filter")
@@ -284,9 +288,6 @@ extension MenuViewController {
                 return
             }
             
-            print("topSectionIndex = \(topSectionIndex)")
-            print("qqqq = \(menuCollectionView.indexPathsForVisibleItems.filter({$0.section == 1}).sorted().map({ $0.row}))")
-            
             guard let items = dataSource.snapshot(for: Section.menu).items as? [MenuController.MenuItem] else {
                 print("Error get items")
                 return
@@ -295,21 +296,16 @@ extension MenuViewController {
             if selectedFilter.title != items[topSectionIndex].category {
                 filterView.selectItem(item: .init(title: items[topSectionIndex].category))
             }
-//            let topSectionIndex = self.menuCollectionView.indexPathsForVisibleItems.map({ $0.section }).sorted()[1]
-//            if
-//               let selectedCollectionIndex = filterView.indexPathsForSelectedItems()?.first?.row {
-//
-//                if selectedCollectionIndex != topSectionIndex {
-//                    let indexPath = IndexPath(item: topSectionIndex, section: 0)
-//                    filterView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
-//                }
-//            }
         }
     }
 }
 
+//MARK: - FilterViewDelegate
 extension MenuViewController: FilterViewDelegate {
     func didSelectFilter(filterItem: FilterItem) {
+        
+        isScrollNow = true
+        
         guard let items = dataSource.snapshot(for: Section.menu).items as? [MenuController.MenuItem] else {
             print("Error get items")
             return
