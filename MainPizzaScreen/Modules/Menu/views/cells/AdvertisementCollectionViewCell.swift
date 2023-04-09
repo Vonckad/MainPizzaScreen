@@ -10,18 +10,11 @@ import UIKit
 class AdvertisementCollectionViewCell: UICollectionViewCell {
     
     static let reuseIdentifier = "advertisement-cell-reuse-identifier"
-    let imageView = UIImageView()
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        configure()
-    }
-    required init?(coder: NSCoder) {
-        fatalError()
-    }
     
-    func configure() {
+    private lazy var imageView: UIImageView = {
+        let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
         contentView.addSubview(imageView)
         
         NSLayoutConstraint.activate([
@@ -30,5 +23,11 @@ class AdvertisementCollectionViewCell: UICollectionViewCell {
             imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
         ])
+        return imageView
+    }()
+    
+    func setupImage(image: UIImage?) {
+        guard let image = image else { return }
+        imageView.image = image
     }
 }

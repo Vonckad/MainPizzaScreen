@@ -139,9 +139,7 @@ class MenuViewController: UIViewController, MenuDisplayLogic
 
 //MARK: - UICollectionViewDelegate
 extension MenuViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("section = \(indexPath.section), row = \(indexPath.row)")
-    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {}
 }
 
 //MARK: - UICollectionViewLayout
@@ -161,11 +159,10 @@ extension MenuViewController {
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8),
                                                        heightDimension: .absolute(123.0))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-                group.contentInsets.leading = 10
                 
                 section = NSCollectionLayoutSection(group: group)
                 section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
-                section.contentInsets = .init(top: 0, leading: 10, bottom: 0, trailing: 20)
+                section.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 20)
                 
             } else if sectionKind != .advertisement {
                 
@@ -207,7 +204,8 @@ extension MenuViewController {
 extension MenuViewController {
     private func createAdvertisementCellRegistration() -> UICollectionView.CellRegistration<AdvertisementCollectionViewCell, MenuController.Advertisement> {
         return UICollectionView.CellRegistration<AdvertisementCollectionViewCell, MenuController.Advertisement> { (cell, indexPath, advertisement) in
-            cell.imageView.image = UIImage(named: advertisement.imageName)
+            cell.setupImage(image: UIImage(named: advertisement.imageName))
+            cell.backgroundColor = .green
         }
     }
     
