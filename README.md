@@ -14,9 +14,5 @@
 
 ## Предпросмотр
 <p align="left">
-<img src="https://github.com/Vonckad/MainPizzaScreen/blob/main/5.PNG" width="18%"> 
-<img src="https://github.com/Vonckad/MainPizzaScreen/blob/main/4.PNG" width="18%"> 
-<img src="https://github.com/Vonckad/MainPizzaScreen/blob/main/3.PNG" width="18%">
-<img src="https://github.com/Vonckad/MainPizzaScreen/blob/main/2.PNG" width="18%">
-<img src="https://github.com/Vonckad/MainPizzaScreen/blob/main/1.PNG" width="18%">
+<img src="https://user-images.githubusercontent.com/14834946/230801846-0aefa0f2-7396-4d38-b335-6462cfd2ce1f.mov" width="33%"> 
 </p>
