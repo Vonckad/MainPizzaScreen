@@ -11,6 +11,6 @@ class ContactsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blue
+        view.backgroundColor = UIColor(white: 0.95, alpha: 1)
     }
 }

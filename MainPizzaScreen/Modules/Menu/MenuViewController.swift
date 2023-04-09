@@ -54,8 +54,8 @@ class MenuViewController: UIViewController, MenuDisplayLogic
         (supplementaryView, string, indexPath) in
     }
     
-    var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>! = nil
-    var currentSnapshot: NSDiffableDataSourceSnapshot<Section, AnyHashable>! = nil
+    private var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>! = nil
+    private var currentSnapshot: NSDiffableDataSourceSnapshot<Section, AnyHashable>! = nil
     
   var interactor: MenuBusinessLogic?
   var router: (NSObjectProtocol & MenuRoutingLogic & MenuDataPassing)?
@@ -144,52 +144,54 @@ extension MenuViewController: UICollectionViewDelegate {
 
 //MARK: - UICollectionViewLayout
 extension MenuViewController {
-    func createLayout() -> UICollectionViewLayout {
+    private func createAdvertisementSection() -> NSCollectionLayoutSection {
+        let section: NSCollectionLayoutSection
+        
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .absolute(100.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8),
+                                               heightDimension: .absolute(123.0))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+        section.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 20)
+        return section
+    }
+    
+    private func createMenuSection() -> NSCollectionLayoutSection {
+        let section: NSCollectionLayoutSection
+        
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .estimated(230.0))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+        
+        section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .none
+        section.interGroupSpacing = 1
+        
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .estimated(60)),
+            elementKind: "sectionHeaderElementKind",
+            alignment: .top)
+        sectionHeader.pinToVisibleBounds = true
+        section.boundarySupplementaryItems = [sectionHeader]
+        return section
+    }
+    
+    private func createLayout() -> UICollectionViewLayout {
         let sectionProvider = { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             
             guard let sectionKind = Section(rawValue: sectionIndex) else { return nil }
             
-            let section: NSCollectionLayoutSection
-            
-            if sectionKind == .advertisement {
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                      heightDimension: .absolute(100.0))
-                let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8),
-                                                       heightDimension: .absolute(123.0))
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-                
-                section = NSCollectionLayoutSection(group: group)
-                section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
-                section.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 20)
-                
-            } else if sectionKind != .advertisement {
-                
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                      heightDimension: .fractionalHeight(1.0))
-                let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                       heightDimension: .estimated(230.0))
-                let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-                
-                section = NSCollectionLayoutSection(group: group)
-                section.orthogonalScrollingBehavior = .none
-                section.interGroupSpacing = 1
-                
-                let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
-                    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                      heightDimension: .estimated(60)),
-                    elementKind: "sectionHeaderElementKind",
-                    alignment: .top)
-                sectionHeader.pinToVisibleBounds = true
-                section.boundarySupplementaryItems = [sectionHeader]
-            } else {
-                fatalError("unknown section")
-            }
-            
-            return section
+            return sectionKind == .advertisement ? self.createAdvertisementSection() : self.createMenuSection()
         }
 
         let config = UICollectionViewCompositionalLayoutConfiguration()

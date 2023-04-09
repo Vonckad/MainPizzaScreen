@@ -26,6 +26,7 @@ class AdvertisementCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
+    // MARK: - Public
     func setupImage(image: UIImage?) {
         guard let image = image else { return }
         imageView.image = image

@@ -7,15 +7,13 @@
 
 import UIKit
 
-//struct FilterItem {
-//    var title: String
-//}
-
 protocol FilterViewDelegate {
     func didSelectFilter(filterItem: String)
 }
 
 class FilterView: UICollectionReusableView {
+    
+    static let reuseIdentifier = "title-supplementary-reuse-identifier"
     
     var filterItems: [String] = [] {
         didSet {
@@ -45,8 +43,7 @@ class FilterView: UICollectionReusableView {
         return filterCollectionView
     }()
     
-    static let reuseIdentifier = "title-supplementary-reuse-identifier"
-    
+    //MARK: - Private
     private func createFlowLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.itemSize = CGSize(width: 200, height: 32)
@@ -56,6 +53,7 @@ class FilterView: UICollectionReusableView {
         return flowLayout
     }
     
+    //MARK: - Public
     func selectedFilterItem() -> String? {
         if let index = filterCollectionView.indexPathsForSelectedItems?.sorted().first?.row {
             return filterItems[index]
@@ -70,6 +68,7 @@ class FilterView: UICollectionReusableView {
     }
 }
 
+//MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension FilterView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return filterItems.count
