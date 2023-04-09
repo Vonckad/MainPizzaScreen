@@ -25,12 +25,14 @@ enum Menu {
         struct Response {
             enum ResponseType {
                 case presentProducts(_ : Data?)
+                case presentLoadError(_ : Error)
             }
         }
         
         struct ViewModel {
             enum viewModelData {
                 case products(_ : MenuController, category: [String])
+                case error(_ : String)
             }
         }
     }

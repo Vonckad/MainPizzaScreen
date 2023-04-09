@@ -33,6 +33,7 @@
 		C9E9299D29DEEE9900A6DBBF /* ServiceFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9299C29DEEE9900A6DBBF /* ServiceFetcher.swift */; };
 		C9E929A029DEEF0F00A6DBBF /* NetProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E9299F29DEEF0F00A6DBBF /* NetProductModel.swift */; };
 		C9E929A329DEFCB300A6DBBF /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = C9E929A229DEFCB300A6DBBF /* SDWebImage */; };
+		C9E929A529E372EF00A6DBBF /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E929A429E372EF00A6DBBF /* UIViewController+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		C9E9299A29DEEC2700A6DBBF /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		C9E9299C29DEEE9900A6DBBF /* ServiceFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFetcher.swift; sourceTree = "<group>"; };
 		C9E9299F29DEEF0F00A6DBBF /* NetProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetProductModel.swift; sourceTree = "<group>"; };
+		C9E929A429E372EF00A6DBBF /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				C9E9298E29DDAEFB00A6DBBF /* UIView+Extension.swift */,
+				C9E929A429E372EF00A6DBBF /* UIViewController+Extension.swift */,
 				C9E9299129DDB11400A6DBBF /* ColorHex.swift */,
 			);
 			path = Extentions;
@@ -298,6 +301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9E929A529E372EF00A6DBBF /* UIViewController+Extension.swift in Sources */,
 				C9E9298829DAD54800A6DBBF /* MenuController.swift in Sources */,
 				C9E9297329DAC6C700A6DBBF /* MenuInteractor.swift in Sources */,
 				C9E9298329DAD13000A6DBBF /* ContactsViewController.swift in Sources */,

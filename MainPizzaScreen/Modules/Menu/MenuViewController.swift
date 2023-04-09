@@ -49,6 +49,14 @@ class MenuViewController: UIViewController, MenuDisplayLogic
         return collectionView
     }()
     
+    private lazy var activityIndicatorView: UIActivityIndicatorView = {
+        let activityIndicatorView = UIActivityIndicatorView(style: .large)
+        menuCollectionView.addSubview(activityIndicatorView)
+        activityIndicatorView.hidesWhenStopped = true
+        activityIndicatorView.center = view.center
+        return activityIndicatorView
+    }()
+    
     private let filterHeaderRegistration = UICollectionView.SupplementaryRegistration
     <FilterView>(elementKind: "sectionHeaderElementKind") {
         (supplementaryView, string, indexPath) in
@@ -122,17 +130,24 @@ class MenuViewController: UIViewController, MenuDisplayLogic
   // MARK: Do something
   func requestProducts()
   {
+      activityIndicatorView.startAnimating()
       interactor?.doInteractor(request: .getProducts)
   }
   
     func displayProducts(viewModel: Menu.Facestore.ViewModel.viewModelData)
   {
+      activityIndicatorView.stopAnimating()
+      
       switch viewModel {
       case .products(let menuController, let category):
           updateCurrentSnapshot(menuController: menuController)
           guard let filterView = menuCollectionView.visibleSupplementaryViews(ofKind: "sectionHeaderElementKind").first as? FilterView else { return }
           filterView.filterItems = category
           filterView.delegate = self
+      case .error(let errorString):
+          showAlert(title: "Ошибка", message: errorString) { [weak self] in
+              self?.requestProducts()
+          }
       }
   }
 }

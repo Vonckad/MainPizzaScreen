@@ -32,6 +32,8 @@ class MenuPresenter: MenuPresentationLogic
                 guard let menuController = self?.createMenuController(products: products) else { return }
                 self?.viewController?.displayProducts(viewModel: .products(menuController.0, category:  menuController.1))
             }
+        case .presentLoadError(let error):
+            self.viewController?.displayProducts(viewModel: .error("Проверьте подключение к интернету\n\(error.localizedDescription)"))
         }
     }
     

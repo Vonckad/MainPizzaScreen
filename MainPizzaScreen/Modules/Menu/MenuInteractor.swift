@@ -38,7 +38,11 @@ class MenuInteractor: MenuBusinessLogic, MenuDataStore
       switch request {
       case .getProducts:
           servise.requestProducts { [weak self] data, error in
-              self?.presenter?.presentResults(response: .presentProducts(data))
+              if let error = error {
+                  self?.presenter?.presentResults(response: .presentLoadError(error))
+              } else {
+                  self?.presenter?.presentResults(response: .presentProducts(data))
+              }
           }
       }
   }
